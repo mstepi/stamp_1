@@ -5,5 +5,5 @@
 ライブラリをインストール
 pip install requests beautifulsoup4
 
-python line_sticker_downloader.py 5392993
-https://store.line.me/stickershop/product/5392993/ja?from=sticker
+python line_sticker_downloader.py 6277
+[https://store.line.me/stickershop/product/6277/ja](https://store.line.me/stickershop/product/6277/ja)
