@@ -1,5 +1,4 @@
 import os
-import re
 import json
 import requests
 from bs4 import BeautifulSoup
@@ -58,14 +57,23 @@ def download_sticker_pack(product_id, save_dir="stickers"):
         static_url = sticker_data.get("staticUrl")
         fallback_url = sticker_data.get("fallbackStaticUrl")
         animation_url = sticker_data.get("animationUrl")
+        popup_url = sticker_data.get("popupUrl")  # ポップアップスタンプ対応
 
-        if animation_url:
+        # ポップアップスタンプがある場合は優先
+        if popup_url:
+            file_ext = ".png" if "png" in popup_url else ".gif"
+            save_path = os.path.join(save_dir, f"{sticker_id}_popup{file_ext}")
+            download_image(popup_url, save_path)
+        # アニメーションスタンプ
+        elif animation_url:
             file_ext = ".png" if "png" in animation_url else ".gif"
             save_path = os.path.join(save_dir, f"{sticker_id}_anim{file_ext}")
             download_image(animation_url, save_path)
+        # 通常スタンプ
         elif static_url:
             save_path = os.path.join(save_dir, f"{sticker_id}.png")
             download_image(static_url, save_path)
+        # フォールバック画像
         elif fallback_url:
             save_path = os.path.join(save_dir, f"{sticker_id}_fallback.png")
             download_image(fallback_url, save_path)
