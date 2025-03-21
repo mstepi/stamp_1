@@ -3,6 +3,7 @@
 アニメーションスタンプ対応
 
 ライブラリをインストール
+
 pip install requests beautifulsoup4
 
 python line_sticker_downloader.py 6277
